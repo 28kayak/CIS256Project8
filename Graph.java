@@ -3,15 +3,17 @@ import java.util.LinkedList;
 public class Graph <E> implements Cloneable
 {
 	//private boolean [][] edges;
-	private LinkedList<EdgeNode> [] edges;
+	//private LinkedList<EdgeNode> [] edges;
+	private Object [] edges;
 	private Object [] labels;
 	//private ArrayList<E> labels;
 	@SuppressWarnings("unchecked")
 	public <E> Graph(int nofVer)
 	{
-		edges = new LinkedList<EdgeNode> [nofVer];
+		//edges = new (LinkedList<EdgeNode>) Object[nofVer];
 		//edges = new boolean [nofVer][nofVer];//All values initially false
 		//labels = (ArrayList<E>) new ArrayList<E>();//All values initially null
+		edges = (LinkedList<EdgeNode>[]) new  Object[nofVer];
 		labels = (E[]) new Object [nofVer];
 	}
 	public void addEdges(int source, int target)
