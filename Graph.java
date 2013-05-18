@@ -1,18 +1,25 @@
-
+import java.util.ArrayList;
+import java.util.LinkedList;
 public class Graph <E> implements Cloneable
 {
-	private boolean [][] edges;
+	//private boolean [][] edges;
+	private LinkedList<EdgeNode> [] edges;
 	private Object [] labels;
-	
+	//private ArrayList<E> labels;
+	@SuppressWarnings("unchecked")
 	public <E> Graph(int nofVer)
 	{
-		edges = new boolean [nofVer][nofVer];//All values initially false
-		labels = (E[]) new Object[nofVer];//All values initially null
+		edges = new LinkedList<EdgeNode> [nofVer];
+		//edges = new boolean [nofVer][nofVer];//All values initially false
+		//labels = (ArrayList<E>) new ArrayList<E>();//All values initially null
+		labels = (E[]) new Object [nofVer];
 	}
 	public void addEdges(int source, int target)
 	{
-		edges[source][target] = true;
+		//edges[source][target] = true;
+		
 	}
+	@SuppressWarnings("unchecked")
 	public Graph<E> clone()
 	{
 		Graph<E> cloned;
@@ -72,5 +79,9 @@ public class Graph <E> implements Cloneable
 	public void setLabel(int vertex , E newLabel)
 	{
 		labels[vertex] = newLabel;
+	}
+	public boolean isPath(int source, int target)
+	{
+		boolean [] processed; 
 	}
 }//class
