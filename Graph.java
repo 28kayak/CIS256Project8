@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 public class Graph <E> implements Cloneable
 {
 	//private boolean [][] edges;
 	//private LinkedList<EdgeNode> [] edges;
 	private Object [] edges;
-	private Object [] labels;
+	private Object [] vertexList;
 	//private ArrayList<E> labels;
 	@SuppressWarnings("unchecked")
 	public <E> Graph(int nofVer)
@@ -14,12 +15,15 @@ public class Graph <E> implements Cloneable
 		//edges = new boolean [nofVer][nofVer];//All values initially false
 		//labels = (ArrayList<E>) new ArrayList<E>();//All values initially null
 		edges = (LinkedList<EdgeNode>[]) new  Object[nofVer];
-		labels = (E[]) new Object [nofVer];
+		vertexList = (E[]) new Object [nofVer];
 	}
+	@SuppressWarnings("unchecked")
 	public void addEdges(int source, int target)
 	{
+		// boolean success;
 		//edges[source][target] = true;
-		
+		//((LinkedList<EdgeNode>) edges[source]).addLast(new EdgeNode(target));
+		 ((LinkedList<EdgeNode>)edges[source]).addLast(new EdgeNode(target));
 	}
 	@SuppressWarnings("unchecked")
 	public Graph<E> clone()
@@ -34,28 +38,42 @@ public class Graph <E> implements Cloneable
 			throw new RuntimeException("this class does not implement Clonable");
 		}
 		cloned.edges = edges.clone();
-		cloned.labels = labels.clone();
+		cloned.vertexList = vertexList.clone();
 		return cloned;
 	}
 	@SuppressWarnings("unchecked")
 	public E getLable(int target)
 	{
-		return (E) labels[target];
+		return (E) vertexList[target];
 	}
 	public boolean isEdge(int source, int target)
 	{ 
-		return edges[source][target];
+		@SuppressWarnings("unchecked")
+		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)edges[source]).iterator();
+		while(iterator.hasNext())
+		{
+			if(target == iterator.next().getvnum())
+			{
+				return true;
+			}
+		}
+		return false;
+		
+		//if(((LinkedList<EdgeNode>)edges[source]).listIterator(target) == null);
+		//return edges[source][target];
 	}
 	public int[] neighbors(int vertex)
 	{
 		int i;
 		int count;
 		int [] neighbor;
-		//first count how many edges have the vertex as thier source
+		//EdgeNode cursor;// = (LinkedList<EdgeNode>) edges[];
+		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)vertexList[vertex]).iterator() ;
+		//first count how many edges have the vertex as their source
 		count = 0;
-		for(i = 0; i < labels.length; i++)
+		for(i = 0; i < vertexList.length; i++)
 		{
-			if(edges[vertex][i])
+			if(iterator.hasNext())
 			{
 				count++;
 			}
@@ -64,9 +82,9 @@ public class Graph <E> implements Cloneable
 		neighbor = new int [count];
 		//fill the array for the neighbor
 		count = 0;
-		for(i = 0; i < labels.length; i++)
+		for(i = 0; i < vertexList.length; i++)
 		{
-			if(edges[vertex][i])
+			if(iterator.hasNext())
 			{
 				neighbor[count++] = i;
 			}
@@ -74,13 +92,19 @@ public class Graph <E> implements Cloneable
 		}
 		return neighbor;
 	}//neighbor
-	public void remoceEdge(int source, int target)
+	@SuppressWarnings("unchecked")
+	public void removeEdge(int source, int target)
 	{
-		edges[source][target] = false;
+		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)edges[source]).iterator();
+		if(target == iterator.next().getvnum())
+		{
+			((LinkedList<EdgeNode>)edges[source]).remove();
+		}
+		//edges[source][target] = false;
 	}
 	public void setLabel(int vertex , E newLabel)
 	{
-		labels[vertex] = newLabel;
+		vertexList [vertex] = newLabel;
 	}
 	public boolean isPath(int source, int target)
 	{
