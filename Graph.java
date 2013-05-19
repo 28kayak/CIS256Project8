@@ -93,6 +93,8 @@ public class Graph <E> implements Cloneable
 		while(iterator.hasNext())
 		{
 			neighbor[count] = iterator.next().getvnum();
+			System.out.println(neighbor[count]);
+			count++;
 			//queue.enqueue(iterator);
 		}
 		
@@ -134,14 +136,25 @@ public class Graph <E> implements Cloneable
 	{
 		vertexList [vertex] = newLabel;
 	}
-	/*
+	
 	public boolean isPath(int source, int target)
 	{
-		boolean [] processed; 
+		boolean [] processed;
+		ArrayQueue queue = new ArrayQueue(vertexList.length);
+		processed = new boolean [vertexList.length]; 
+		//do a process
+		vertexList[source];
+		//mark processed vertex
+		processed[source] = true;
+		//enter vertex in queue 
+		queue.enqueue(vertexList[source]);
+		//Step 1
+		while(queue.)
+		
 		
 		
 	}
-	*/
+	
 	public void printGraph()
 	{
 		for(int i = 0; i < edges.length; i++)

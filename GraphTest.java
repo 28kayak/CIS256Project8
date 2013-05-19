@@ -7,8 +7,9 @@ public class GraphTest
 		Graph<Integer> g = new Graph<Integer>(5);
 		g.addEdges(0, 3);
 		g.addEdges(3, 2);
-		g.addEdges(1, 3);
-		g.addEdges(2, 2);
+		g.addEdges(3, 3);
+		g.addEdges(4, 2);
+		g.addEdges(3, 4);
 		g.printGraph();
 		
 		//g.neighbors(3);
@@ -17,6 +18,10 @@ public class GraphTest
 		{
 			System.out.println("tonari = " + tonari[i]);
 		}
+		g.removeEdge(3, 2);
+		g.removeEdge(4, 2);
+		g.printGraph();
+		System.out.println("label = " + g.getLable(3));
 		
 	}
 }
