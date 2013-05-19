@@ -7,6 +7,7 @@ public class Graph <E> implements Cloneable
 	//private LinkedList<EdgeNode> [] edges;
 	private Object [] edges;
 	private Object [] vertexList;
+	private int [] numOfEdges;
 	//private ArrayList<E> labels;
 	@SuppressWarnings("unchecked")
 	public <E> Graph(int nofVer)
@@ -15,7 +16,13 @@ public class Graph <E> implements Cloneable
 		//edges = new boolean [nofVer][nofVer];//All values initially false
 		//labels = (ArrayList<E>) new ArrayList<E>();//All values initially null
 		edges = (LinkedList<EdgeNode>[]) new  Object[nofVer];
+		/*for(int i = 0; i < nofVer; i++)
+		{
+			edges[i] = new LinkedList();
+		}
+		*/
 		vertexList = (E[]) new Object [nofVer];
+		numOfEdges = new int[nofVer];
 	}
 	@SuppressWarnings("unchecked")
 	public void addEdges(int source, int target)
@@ -23,7 +30,16 @@ public class Graph <E> implements Cloneable
 		// boolean success;
 		//edges[source][target] = true;
 		//((LinkedList<EdgeNode>) edges[source]).addLast(new EdgeNode(target));
-		 ((LinkedList<EdgeNode>)edges[source]).addLast(new EdgeNode(target));
+		if(isEdge(source, target))
+		{//duplicate edge
+			System.out.println("duplicate edges");
+		}
+		else
+		{
+			((LinkedList<EdgeNode>)edges[source]).addLast(new EdgeNode(target));
+			numOfEdges[source]++;
+		}
+		 
 	}
 	@SuppressWarnings("unchecked")
 	public Graph<E> clone()
@@ -64,13 +80,23 @@ public class Graph <E> implements Cloneable
 	}
 	public int[] neighbors(int vertex)
 	{
+		ArrayQueue queue = new ArrayQueue(edges.length);
 		int i;
 		int count;
 		int [] neighbor;
 		//EdgeNode cursor;// = (LinkedList<EdgeNode>) edges[];
-		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)vertexList[vertex]).iterator() ;
+		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)edges[vertex]).iterator();
 		//first count how many edges have the vertex as their source
 		count = 0;
+		neighbor = new int [numOfEdges[vertex]];
+		while(iterator.hasNext())
+		{
+			neighbor[count] = iterator.next().getvnum();
+			//queue.enqueue(iterator);
+		}
+		
+		/*
+		 * 
 		for(i = 0; i < vertexList.length; i++)
 		{
 			if(iterator.hasNext())
@@ -90,6 +116,7 @@ public class Graph <E> implements Cloneable
 			}
 			
 		}
+		*/
 		return neighbor;
 	}//neighbor
 	@SuppressWarnings("unchecked")
@@ -106,8 +133,31 @@ public class Graph <E> implements Cloneable
 	{
 		vertexList [vertex] = newLabel;
 	}
+	/*
 	public boolean isPath(int source, int target)
 	{
 		boolean [] processed; 
+		
+		
+	}
+	*/
+	public void printGraph()
+	{
+		for(int i = 0; i < edges.length; i++)
+		{
+			for(int j = 0; j < edges.length; j++)
+			{
+				if(isEdge(i, j))
+				{
+					System.out.print("T ");
+				}
+				else
+				{
+					System.out.print("F");
+				}
+			}
+			System.out.println();
+			
+		}
 	}
 }//class
