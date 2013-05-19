@@ -148,9 +148,11 @@ public class Graph <E> implements Cloneable
 		processed[source] = true;
 		//enter vertex in queue 
 		queue.enqueue(vertexList[source]);
-		//Step 1
+		//get into Step 1
 		while(queue.)
-		
+		{
+			
+		}
 		
 		
 	}
