@@ -137,21 +137,28 @@ public class Graph <E> implements Cloneable
 		vertexList [vertex] = newLabel;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean isPath(int source, int target)
 	{
 		boolean [] processed;
+		int count = 0;
 		ArrayQueue queue = new ArrayQueue(vertexList.length);
 		processed = new boolean [vertexList.length]; 
+		Graph<E> cursor;
 		//do a process
-		vertexList[source];
+		((Graph<E>) vertexList[source]).getLable(target);
 		//mark processed vertex
 		processed[source] = true;
 		//enter vertex in queue 
 		queue.enqueue(vertexList[source]);
 		//get into Step 1
-		while(queue.)
+		while(queue.isEmpty() && processed[count])
 		{
+			//pop from queue 
+			cursor = (Graph<E>) queue.dequeue();
 			
+			System.out.println();
+		
 		}
 		
 		
