@@ -4,26 +4,26 @@ import java.util.LinkedList;
 public class Graph <E> implements Cloneable
 {
 	//private boolean [][] edges;
-	//private LinkedList<EdgeNode> [] edges;
-	private Object [] edges;
+	private LinkedList<EdgeNode> [] edges;
+	//private Object [] edges;
 	private Object [] vertexList;
 	private int [] numOfEdges;
 	//private ArrayList<E> labels;
 	@SuppressWarnings("unchecked")
 	public <E> Graph(int nofVer)
 	{
-		//edges = new (LinkedList<EdgeNode>) Object[nofVer];
-		//edges = new boolean [nofVer][nofVer];//All values initially false
-		//labels = (ArrayList<E>) new ArrayList<E>();//All values initially null
-		edges = (LinkedList<EdgeNode>[]) new  Object[nofVer];
-		/*for(int i = 0; i < nofVer; i++)
+		System.out.println("constructing");
+		edges = (LinkedList<EdgeNode>[]) new  LinkedList[nofVer];
+		for(int i = 0; i < nofVer; i++)
 		{
 			edges[i] = new LinkedList();
 		}
-		*/
+		
 		vertexList = (E[]) new Object [nofVer];
 		numOfEdges = new int[nofVer];
 	}
+	//private ArrayList<E> labels;
+	
 	@SuppressWarnings("unchecked")
 	public void addEdges(int source, int target)
 	{
@@ -66,6 +66,7 @@ public class Graph <E> implements Cloneable
 	{ 
 		@SuppressWarnings("unchecked")
 		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)edges[source]).iterator();
+		
 		while(iterator.hasNext())
 		{
 			if(target == iterator.next().getvnum())
@@ -145,15 +146,17 @@ public class Graph <E> implements Cloneable
 	{
 		for(int i = 0; i < edges.length; i++)
 		{
+			//System.out.print(i);
 			for(int j = 0; j < edges.length; j++)
 			{
+				//System.out.print(j);
 				if(isEdge(i, j))
 				{
-					System.out.print("T ");
+					System.out.print(" T ");
 				}
 				else
 				{
-					System.out.print("F");
+					System.out.print(" F ");
 				}
 			}
 			System.out.println();
