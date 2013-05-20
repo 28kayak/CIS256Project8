@@ -22,6 +22,7 @@ public class GraphTest
 		g.removeEdge(4, 2);
 		g.printGraph();
 		System.out.println("label = " + g.getLable(3));
+		g.isPath(3, 2);
 		
 	}
 }

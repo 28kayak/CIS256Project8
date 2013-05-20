@@ -141,26 +141,53 @@ public class Graph <E> implements Cloneable
 	public boolean isPath(int source, int target)
 	{
 		boolean [] processed;
+		int [] neighbor;
 		int count = 0;
 		ArrayQueue queue = new ArrayQueue(vertexList.length);
 		processed = new boolean [vertexList.length]; 
 		Graph<E> cursor;
+		int deQ;
 		//do a process
 		((Graph<E>) vertexList[source]).getLable(target);
 		//mark processed vertex
 		processed[source] = true;
 		//enter vertex in queue 
-		queue.enqueue(vertexList[source]);
+		queue.enqueue(source);
 		//get into Step 1
-		while(queue.isEmpty() && processed[count])
+		while(queue.isEmpty())
 		{
 			//pop from queue 
-			cursor = (Graph<E>) queue.dequeue();
-			
+			 deQ = (int) queue.dequeue();
+			//System.out.println(cursor.getLable(cursor.vertexList[]))
 			System.out.println();
-		
+			neighbor = this.neighbors(deQ);
+			for(int i = 0; i < neighbor.length; i++)
+			{
+				//isPath() returns in the middle of cheching. 
+				//if(neighbor[i] == target)
+				//{
+					//return true;
+				//}
+				//else
+				//{
+					if(processed[i] == false)
+					{
+						System.out.println(neighbor[i]);
+						processed[neighbor[i]] = true;
+						queue.enqueue(neighbor[i]);
+					}
+				//}
+			}
 		}
-		
+		if(processed[target])
+		{//inside of processed means the source has a path to reaches target
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+				
 		
 	}
 	
