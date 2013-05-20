@@ -18,11 +18,18 @@ public class GraphTest
 		{
 			System.out.println("tonari = " + tonari[i]);
 		}
-		g.removeEdge(3, 2);
+		//g.removeEdge(3, 2);
 		g.removeEdge(4, 2);
 		g.printGraph();
 		System.out.println("label = " + g.getLable(3));
-		g.isPath(3, 2);
+		if(g.isPath(0, 3))
+		{
+			System.out.println("yes, there is a path");
+		}
+		else
+		{
+			System.out.println("No, there is not path");
+		}
 		
 	}
 }

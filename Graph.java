@@ -24,7 +24,6 @@ public class Graph <E> implements Cloneable
 	}
 	//private ArrayList<E> labels;
 	
-	@SuppressWarnings("unchecked")
 	public void addEdges(int source, int target)
 	{
 		// boolean success;
@@ -64,7 +63,6 @@ public class Graph <E> implements Cloneable
 	}
 	public boolean isEdge(int source, int target)
 	{ 
-		@SuppressWarnings("unchecked")
 		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)edges[source]).iterator();
 		
 		while(iterator.hasNext())
@@ -81,8 +79,8 @@ public class Graph <E> implements Cloneable
 	}
 	public int[] neighbors(int vertex)
 	{
-		ArrayQueue queue = new ArrayQueue(edges.length);
-		int i;
+		//ArrayQueue queue = new ArrayQueue(edges.length);
+		//int i;
 		int count;
 		int [] neighbor;
 		//EdgeNode cursor;// = (LinkedList<EdgeNode>) edges[];
@@ -122,7 +120,6 @@ public class Graph <E> implements Cloneable
 		*/
 		return neighbor;
 	}//neighbor
-	@SuppressWarnings("unchecked")
 	public void removeEdge(int source, int target)
 	{
 		Iterator<EdgeNode> iterator = ((LinkedList<EdgeNode>)edges[source]).iterator();
@@ -137,25 +134,26 @@ public class Graph <E> implements Cloneable
 		vertexList [vertex] = newLabel;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public boolean isPath(int source, int target)
 	{
+		System.out.println("inside of isPath");
 		boolean [] processed;
 		int [] neighbor;
-		int count = 0;
+		//int count = 0;
 		ArrayQueue queue = new ArrayQueue(vertexList.length);
 		processed = new boolean [vertexList.length]; 
-		Graph<E> cursor;
+		//Graph<E> cursor;
 		int deQ;
 		//do a process
-		((Graph<E>) vertexList[source]).getLable(target);
+		//((Graph<E>) vertexList[source]).getLable(target);
 		//mark processed vertex
 		processed[source] = true;
 		//enter vertex in queue 
 		queue.enqueue(source);
 		//get into Step 1
-		while(queue.isEmpty())
+		while(!queue.isEmpty())
 		{
+			System.out.println("inside of while");
 			//pop from queue 
 			 deQ = (int) queue.dequeue();
 			//System.out.println(cursor.getLable(cursor.vertexList[]))
@@ -163,15 +161,17 @@ public class Graph <E> implements Cloneable
 			neighbor = this.neighbors(deQ);
 			for(int i = 0; i < neighbor.length; i++)
 			{
-				//isPath() returns in the middle of cheching. 
+				System.out.println("in side of for loop");
+				//isPath() returns in the middle of checking. 
 				//if(neighbor[i] == target)
 				//{
 					//return true;
 				//}
 				//else
 				//{
-					if(processed[i] == false)
+					if(processed[neighbor[i]] == false)
 					{
+						//System.out.println("inside of if-statement");
 						System.out.println(neighbor[i]);
 						processed[neighbor[i]] = true;
 						queue.enqueue(neighbor[i]);
