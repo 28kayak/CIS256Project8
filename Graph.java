@@ -8,11 +8,12 @@ public class Graph <E> implements Cloneable
 	//private Object [] edges;
 	private Object [] vertexList;
 	private int [] numOfEdges;
+	private int vertexCounter;
 	//private ArrayList<E> labels;
 	@SuppressWarnings("unchecked")
 	public <E> Graph(int nofVer)
 	{
-		System.out.println("constructing");
+		//System.out.println("constructing");
 		edges = (LinkedList<EdgeNode>[]) new  LinkedList[nofVer];
 		for(int i = 0; i < nofVer; i++)
 		{
@@ -21,6 +22,7 @@ public class Graph <E> implements Cloneable
 		
 		vertexList = (E[]) new Object [nofVer];
 		numOfEdges = new int[nofVer];
+		vertexCounter = 0;
 	}
 	//private ArrayList<E> labels;
 	
@@ -132,11 +134,12 @@ public class Graph <E> implements Cloneable
 	public void setLabel(int vertex , E newLabel)
 	{
 		vertexList [vertex] = newLabel;
+		vertexCounter++;
 	}
 	
 	public boolean isPath(int source, int target)
 	{
-		System.out.println("inside of isPath");
+		//System.out.println("inside of isPath");
 		boolean [] processed;
 		int [] neighbor;
 		//int count = 0;
@@ -153,7 +156,7 @@ public class Graph <E> implements Cloneable
 		//get into Step 1
 		while(!queue.isEmpty())
 		{
-			System.out.println("inside of while");
+			//System.out.println("inside of while");
 			//pop from queue 
 			 deQ = (int) queue.dequeue();
 			//System.out.println(cursor.getLable(cursor.vertexList[]))
@@ -211,5 +214,20 @@ public class Graph <E> implements Cloneable
 			System.out.println();
 			
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int getIndex(E label)
+	{
+		for(int i = 0; i < vertexList.length; i++)
+		{
+			System.out.println("label =" + label);
+			System.out.println("vertex list = " + vertexList[i]);
+			if(label.equals((E)vertexList[i]))
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 }//class

@@ -21,7 +21,8 @@ public class GraphTest
 		//g.removeEdge(3, 2);
 		g.removeEdge(4, 2);
 		g.printGraph();
-		System.out.println("label = " + g.getLable(3));
+		g.setLabel(3, 3);//vertex and data
+		System.out.println("label = " + g.getLable(3));//enter vertex num and get data
 		if(g.isPath(0, 3))
 		{
 			System.out.println("yes, there is a path");
